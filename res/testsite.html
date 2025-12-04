@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Test Automation Practice Site</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .section { margin-bottom: 30px; padding: 15px; border: 1px solid #ddd; }
+    label { display: block; margin-top: 8px; }
+    table, th, td { border: 1px solid #ccc; border-collapse: collapse; padding: 6px; }
+    .btn { padding: 6px 12px; margin-top: 10px; cursor: pointer; }
+    .hidden { display: none; }
+    .wizard-step label { display:block; margin-top:8px; }
+
+  </style>
+</head>
+<body>
+  <h1>Test Automation Practice Site</h1>
+
+  <!-- Login form -->
+  <div class="section" id="login-section">
+    <h2>Login Form</h2>
+    <label for="username">Username (demo: admin)</label>
+    <input id="username" name="username" type="text" />
+
+    <label for="password">Password (demo: password123)</label>
+    <input id="password" name="password" type="password" />
+
+    <label>
+      <input type="checkbox" id="remember-me" /> Remember me
+    </label>
+
+    <button id="login-btn" class="btn">Login</button>
+    <a id="forgot-link" href="#">Forgot password?</a>
+    <p id="login-message"></p>
+  </div>
+
+  <!-- Search + table + sort button -->
+  <div class="section" id="search-section">
+    <h2>Search Products</h2>
+    <label for="search">Search term</label>
+    <input id="search" name="search" type="text" />
+    <button id="search-btn" class="btn">Search</button>
+    <button id="clear-search-btn" class="btn">Clear</button>
+
+    <button id="sort-price-btn" class="btn">Sort by Price</button>
+
+    <table id="results-table">
+      <thead>
+        <tr><th>Name</th><th>Category</th><th>Price</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Keyboard</td><td>Electronics</td><td>25</td></tr>
+        <tr><td>Mouse</td><td>Electronics</td><td>15</td></tr>
+        <tr><td>Mug</td><td>Home</td><td>8</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Preferences with dropdown + textarea -->
+  <div class="section" id="preferences-section">
+    <h2>Preferences</h2>
+    <p>Choose tools you use:</p>
+    <label><input type="checkbox" id="tool-selenium" /> Selenium</label>
+    <label><input type="checkbox" id="tool-playwright" /> Playwright</label>
+    <label><input type="checkbox" id="tool-cypress" /> Cypress</label>
+
+    <p>Experience level:</p>
+    <label><input type="radio" name="level" value="beginner" /> Beginner</label>
+    <label><input type="radio" name="level" value="intermediate" /> Intermediate</label>
+    <label><input type="radio" name="level" value="advanced" /> Advanced</label>
+
+    <p>Favorite language:</p>
+    <select id="language-select">
+      <option value="">Select...</option>
+      <option value="java">Java</option>
+      <option value="javascript">JavaScript</option>
+      <option value="python">Python</option>
+    </select>
+
+    <p>Comments:</p>
+    <textarea id="comments" rows="3" cols="40"></textarea>
+
+    <button id="save-pref-btn" class="btn">Save Preferences</button>
+    <p id="pref-message"></p>
+  </div>
+
+  <!-- Dynamic content -->
+  <div class="section" id="dynamic-section">
+    <h2>Dynamic Content</h2>
+    <button id="load-btn" class="btn">Load Message (2s delay)</button>
+    <p id="dynamic-text"></p>
+  </div>
+
+  <!-- Modal / popup -->
+  <div class="section" id="modal-section">
+    <h2>Modal Popup</h2>
+    <button id="open-modal-btn" class="btn">Open Modal</button>
+    <div id="modal" class="hidden">
+      <p id="modal-text">This is a modal dialog.</p>
+      <button id="close-modal-btn" class="btn">Close</button>
+    </div>
+  </div>
+
+  <!-- File upload and disabled button -->
+  <div class="section" id="upload-section">
+    <h2>File Upload & Disabled Button</h2>
+    <input type="file" id="file-input" />
+    <button id="upload-btn" class="btn" disabled>Upload</button>
+    <p id="upload-message"></p>
+  </div>
+
+  <!-- Tooltip / hover text -->
+  <div class="section" id="tooltip-section">
+    <h2>Tooltip Example</h2>
+    <button id="tooltip-btn" class="btn" title="This tooltip is for hover testing">
+      Hover me
+    </button>
+  </div>
+
+  <!-- Tabs + dynamic list + fake API -->
+  <div class="section" id="tabs-section">
+    <h2>Tabs & Dynamic List</h2>
+    <button class="btn" data-tab="tab-login">Login Tab</button>
+    <button class="btn" data-tab="tab-products">Products Tab</button>
+    <button class="btn" data-tab="tab-api">API Tab</button>
+
+    <div id="tab-login" class="tab-panel">
+      <p>This tab just describes the login scenario.</p>
+    </div>
+
+    <div id="tab-products" class="tab-panel hidden">
+      <p>Dynamic product list (you can add/remove items).</p>
+      <input id="new-product-name" type="text" placeholder="Product name" />
+      <button id="add-product-btn" class="btn">Add Product</button>
+      <ul id="product-list">
+        <li data-id="1">Laptop</li>
+        <li data-id="2">Headphones</li>
+      </ul>
+    </div>
+
+    <div id="tab-api" class="tab-panel hidden">
+      <p>Simulated API status: <span id="api-status">Not called</span></p>
+      <button id="call-api-btn" class="btn">Call Fake API</button>
+    </div>
+  </div>
+
+  <!-- Iframe section -->
+  <div class="section" id="iframe-section">
+    <h2>Iframe Example</h2>
+    <iframe id="info-frame" srcdoc="
+      <html>
+        <body>
+          <h3 id='frame-title'>Iframe Content</h3>
+          <button id='frame-btn' onclick='document.getElementById(&quot;frame-title&quot;).innerText = &quot;Clicked inside iframe!&quot;'>
+            Click Inside Iframe
+          </button>
+        </body>
+      </html>
+    " width="100%" height="120"></iframe>
+  </div>
+
+    <!-- Shopping Cart -->
+  <div class="section" id="cart-section">
+    <h2>Shopping Cart</h2>
+    <p>Cart items: <span id="cart-count">0</span></p>
+    <table id="cart-table">
+      <thead>
+        <tr><th>Name</th><th>Price</th><th>Qty</th><th>Action</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <p>Total: <span id="cart-total">0</span></p>
+    <button id="clear-cart-btn" class="btn">Clear Cart</button>
+  </div>
+
+  <!-- New UI Features -->
+
+  <!-- Drag & Drop Kanban -->
+  <div class="section" id="kanban-section">
+    <h2>Drag &amp; Drop Kanban</h2>
+    <div style="display:flex; gap:20px;">
+      <div>
+        <h3>To Do</h3>
+        <div class="kanban-column" id="todo-column" 
+             style="width:180px; min-height:120px; border:1px dashed #aaa; padding:8px;">
+          <div class="kanban-card" draggable="true" data-id="t1"
+               style="border:1px solid #666; margin:4px; padding:4px;">Write tests</div>
+          <div class="kanban-card" draggable="true" data-id="t2"
+               style="border:1px solid #666; margin:4px; padding:4px;">Fix bugs</div>
+        </div>
+      </div>
+      <div>
+        <h3>In Progress</h3>
+        <div class="kanban-column" id="progress-column"
+             style="width:180px; min-height:120px; border:1px dashed #aaa; padding:8px;"></div>
+      </div>
+      <div>
+        <h3>Done</h3>
+        <div class="kanban-column" id="done-column"
+             style="width:180px; min-height:120px; border:1px dashed #aaa; padding:8px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom Date Picker -->
+  <div class="section" id="datepicker-section">
+    <h2>Custom Date Picker</h2>
+    <input id="date-input" type="text" placeholder="YYYY-MM-DD" readonly />
+    <button id="open-calendar-btn" class="btn">Pick Date</button>
+    <div id="calendar" class="hidden" 
+         style="margin-top:10px; border:1px solid #ccc; padding:8px; width:220px;">
+      <p>Select a date (dummy static month):</p>
+      <div id="calendar-days" style="display:flex; flex-wrap:wrap; gap:4px;"></div>
+    </div>
+  </div>
+
+  <!-- Slider -->
+  <div class="section" id="slider-section">
+    <h2>Slider</h2>
+    <input id="volume-slider" type="range" min="0" max="100" value="50" />
+    <span id="volume-value">50</span>
+  </div>
+
+  <!-- Infinite List -->
+  <div class="section" id="infinite-section">
+    <h2>Infinite List</h2>
+    <ul id="infinite-list">
+      <li>Item 1</li>
+      <li>Item 2</li>
+      <li>Item 3</li>
+    </ul>
+    <button id="load-more-btn" class="btn">Load More</button>
+    <p id="load-more-status"></p>
+  </div>
+
+    <!-- Multi Step Wizard -->
+  <div class="section" id="wizard-section">
+    <h2>Multi Step Wizard</h2>
+
+    <div id="wizard-steps">
+      <!-- Step 1 -->
+      <div class="wizard-step" data-step="1">
+        <h3>Step 1: Personal Info</h3>
+        <label>First name
+          <input id="wiz-first-name" type="text" />
+        </label>
+        <label>Last name
+          <input id="wiz-last-name" type="text" />
+        </label>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="wizard-step hidden" data-step="2">
+        <h3>Step 2: Address</h3>
+        <label>City
+          <input id="wiz-city" type="text" />
+        </label>
+        <label>Country
+          <input id="wiz-country" type="text" />
+        </label>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="wizard-step hidden" data-step="3">
+        <h3>Step 3: Review</h3>
+        <p id="wiz-review"></p>
+      </div>
+    </div>
+
+    <div style="margin-top:10px;">
+      <button id="wiz-prev-btn" class="btn" disabled>Previous</button>
+      <button id="wiz-next-btn" class="btn">Next</button>
+    </div>
+
+    <p id="wiz-status"></p>
+  </div>
+
+  <!-- Toast / Snackbar -->
+  <div id="toast" class="hidden"
+       style="position:fixed; bottom:20px; right:20px;
+              background:#333; color:#fff; padding:10px 16px;
+              border-radius:4px; min-width:200px;">
+    <span id="toast-text"></span>
+  </div>
+
+
+  <script>
+    // ==== Login + validation ====
+    document.getElementById('login-btn').addEventListener('click', () => {
+      const user = document.getElementById('username').value;
+      const pass = document.getElementById('password').value;
+      const msg = document.getElementById('login-message');
+      if (user === 'admin' && pass === 'password123') {
+        msg.textContent = 'Login successful!';
+        msg.style.color = 'green';
+      } else {
+        msg.textContent = 'Invalid credentials.';
+        msg.style.color = 'red';
+      }
+    });
+
+    document.getElementById('forgot-link').addEventListener('click', (e) => {
+      e.preventDefault();
+      alert('Password reset link sent!');
+    });
+
+    // Simple blur validation
+    document.getElementById('username').addEventListener('blur', () => {
+      const val = document.getElementById('username').value.trim();
+      const msg = document.getElementById('login-message');
+      if (!val) {
+        msg.textContent = 'Username is required.';
+        msg.style.color = 'orange';
+      }
+    });
+
+    // ==== Search + table ====
+    document.getElementById('search-btn').addEventListener('click', () => {
+      alert('Search executed for: ' + document.getElementById('search').value);
+    });
+
+    document.getElementById('clear-search-btn').addEventListener('click', () => {
+      document.getElementById('search').value = '';
+    });
+
+    // Sort by price
+    document.getElementById('sort-price-btn').addEventListener('click', () => {
+      const tbody = document.querySelector('#results-table tbody');
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      rows.sort((a, b) => {
+        const priceA = parseInt(a.cells[2].textContent, 10);
+        const priceB = parseInt(b.cells[2].textContent, 10);
+        return priceA - priceB;
+      });
+      rows.forEach(r => tbody.appendChild(r));
+    });
+
+    // ==== Preferences ====
+    document.getElementById('save-pref-btn').addEventListener('click', () => {
+      document.getElementById('pref-message').textContent = 'Preferences saved!';
+    });
+
+    // ==== Dynamic content ====
+    document.getElementById('load-btn').addEventListener('click', () => {
+      const text = document.getElementById('dynamic-text');
+      text.textContent = 'Loading...';
+      setTimeout(() => {
+        text.textContent = 'Dynamic content loaded!';
+      }, 2000);
+    });
+
+    // ==== Modal ====
+    document.getElementById('open-modal-btn').addEventListener('click', () => {
+      document.getElementById('modal').classList.remove('hidden');
+    });
+    document.getElementById('close-modal-btn').addEventListener('click', () => {
+      document.getElementById('modal').classList.add('hidden');
+    });
+
+    // ==== File upload ====
+    document.getElementById('file-input').addEventListener('change', () => {
+      const hasFile = document.getElementById('file-input').files.length > 0;
+      document.getElementById('upload-btn').disabled = !hasFile;
+    });
+
+    document.getElementById('upload-btn').addEventListener('click', () => {
+      document.getElementById('upload-message').textContent = 'File upload simulated.';
+    });
+
+    // ==== Tabs + dynamic list + fake API ====
+    document.querySelectorAll('#tabs-section .btn[data-tab]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-tab');
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
+        document.getElementById(targetId).classList.remove('hidden');
+      });
+    });
+
+    document.getElementById('add-product-btn').addEventListener('click', () => {
+      const input = document.getElementById('new-product-name');
+      const name = input.value.trim();
+      if (!name) return;
+      const li = document.createElement('li');
+      li.textContent = name;
+      li.dataset.id = Date.now();
+      document.getElementById('product-list').appendChild(li);
+      input.value = '';
+    });
+
+    document.getElementById('call-api-btn').addEventListener('click', () => {
+      const span = document.getElementById('api-status');
+      span.textContent = 'Calling...';
+      span.style.color = 'black';
+      setTimeout(() => {
+        const ok = Math.random() > 0.3;
+        span.textContent = ok ? 'Success (200)' : 'Error (500)';
+        span.style.color = ok ? 'green' : 'red';
+      }, 1500);
+    });
+
+
+        // ==== Shopping Cart (uses existing products table) ====
+    const cart = {}; // key: name, value: { price, qty }
+
+    // add "Add to Cart" buttons to product table
+    (function addCartButtons() {
+      const rows = document.querySelectorAll('#results-table tbody tr');
+      rows.forEach(row => {
+        if (row.querySelector('.add-cart-btn')) return;
+        const name = row.cells[0].textContent;
+        const price = parseInt(row.cells[2].textContent, 10);
+        const btn = document.createElement('button');
+        btn.textContent = 'Add to Cart';
+        btn.className = 'btn add-cart-btn';
+        btn.addEventListener('click', () => addToCart(name, price));
+        const cell = document.createElement('td');
+        cell.appendChild(btn);
+        row.appendChild(cell);
+      });
+      // add header cell
+      const headerRow = document.querySelector('#results-table thead tr');
+      if (headerRow.cells.length < 4) {
+        const th = document.createElement('th');
+        th.textContent = 'Action';
+        headerRow.appendChild(th);
+      }
+    })();
+
+    function renderCart() {
+      const tbody = document.querySelector('#cart-table tbody');
+      tbody.innerHTML = '';
+      let total = 0;
+      let count = 0;
+      Object.keys(cart).forEach(name => {
+        const item = cart[name];
+        const tr = document.createElement('tr');
+        const price = item.price * item.qty;
+        total += price;
+        count += item.qty;
+
+        tr.innerHTML = `
+          <td>${name}</td>
+          <td>${item.price}</td>
+          <td>${item.qty}</td>
+          <td><button class="btn remove-btn" data-name="${name}">Remove</button></td>
+        `;
+        tbody.appendChild(tr);
+      });
+      document.getElementById('cart-total').textContent = total.toString();
+      document.getElementById('cart-count').textContent = count.toString();
+
+      // bind remove buttons
+      tbody.querySelectorAll('.remove-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const name = btn.getAttribute('data-name');
+          delete cart[name];
+          renderCart();
+        });
+      });
+    }
+
+    function addToCart(name, price) {
+      if (!cart[name]) {
+        cart[name] = { price, qty: 0 };
+      }
+      cart[name].qty += 1;
+      renderCart();
+    }
+
+    document.getElementById('clear-cart-btn').addEventListener('click', () => {
+      Object.keys(cart).forEach(k => delete cart[k]);
+      renderCart();
+    });
+
+    // ==== Drag & Drop Kanban ====
+    let draggedCard = null;
+
+    document.querySelectorAll('.kanban-card').forEach(card => {
+      card.addEventListener('dragstart', (e) => {
+        draggedCard = card;
+        e.dataTransfer.effectAllowed = 'move';
+      });
+      card.addEventListener('dragend', () => {
+        draggedCard = null;
+      });
+    });
+
+    document.querySelectorAll('.kanban-column').forEach(col => {
+      col.addEventListener('dragover', (e) => {
+        e.preventDefault();
+      });
+      col.addEventListener('drop', (e) => {
+        e.preventDefault();
+        if (draggedCard) {
+          col.appendChild(draggedCard);
+        }
+      });
+    });
+
+    // ==== Custom Date Picker ====
+    const calendar = document.getElementById('calendar');
+    const daysContainer = document.getElementById('calendar-days');
+
+    // build a static 30-day grid
+    for (let d = 1; d <= 30; d++) {
+      const btn = document.createElement('button');
+      btn.textContent = d.toString();
+      btn.className = 'btn';
+      btn.style.margin = '2px';
+      btn.addEventListener('click', () => {
+        const day = d.toString().padStart(2, '0');
+        document.getElementById('date-input').value = `2025-01-${day}`;
+        calendar.classList.add('hidden');
+      });
+      daysContainer.appendChild(btn);
+    }
+
+    document.getElementById('open-calendar-btn').addEventListener('click', () => {
+      calendar.classList.toggle('hidden');
+    });
+
+    // ==== Slider ====
+    const slider = document.getElementById('volume-slider');
+    const sliderValue = document.getElementById('volume-value');
+    slider.addEventListener('input', () => {
+      sliderValue.textContent = slider.value;
+    });
+
+    // ==== Infinite List ====
+    let infiniteIndex = 3;
+    document.getElementById('load-more-btn').addEventListener('click', () => {
+      const status = document.getElementById('load-more-status');
+      status.textContent = 'Loading...';
+      setTimeout(() => {
+        const list = document.getElementById('infinite-list');
+        for (let i = 1; i <= 3; i++) {
+          infiniteIndex += 1;
+          const li = document.createElement('li');
+          li.textContent = `Item ${infiniteIndex}`;
+          list.appendChild(li);
+        }
+        status.textContent = 'More items loaded.';
+      }, 1500);
+    });
+
+        // ==== Multi Step Wizard ====
+    let currentStep = 1;
+    const totalSteps = 3;
+
+    function showStep(step) {
+      document.querySelectorAll('#wizard-steps .wizard-step').forEach(div => {
+        const s = parseInt(div.getAttribute('data-step'), 10);
+        div.classList.toggle('hidden', s !== step);
+      });
+
+      document.getElementById('wiz-prev-btn').disabled = step === 1;
+      const nextBtn = document.getElementById('wiz-next-btn');
+      nextBtn.textContent = step === totalSteps ? 'Submit' : 'Next';
+      document.getElementById('wiz-status').textContent =
+        'You are on step ' + step + ' of ' + totalSteps;
+    }
+
+    function validateStep(step) {
+      if (step === 1) {
+        const fn = document.getElementById('wiz-first-name').value.trim();
+        const ln = document.getElementById('wiz-last-name').value.trim();
+        return fn && ln;
+      }
+      if (step === 2) {
+        const city = document.getElementById('wiz-city').value.trim();
+        const country = document.getElementById('wiz-country').value.trim();
+        return city && country;
+      }
+      return true;
+    }
+
+    document.getElementById('wiz-next-btn').addEventListener('click', () => {
+      if (!validateStep(currentStep)) {
+        showToast('Please fill all required fields on this step.', 'error');
+        return;
+      }
+
+      if (currentStep < totalSteps) {
+        currentStep += 1;
+        if (currentStep === 3) {
+          const summary =
+            'Name: ' + document.getElementById('wiz-first-name').value +
+            ' ' + document.getElementById('wiz-last-name').value +
+            ' | City: ' + document.getElementById('wiz-city').value +
+            ' | Country: ' + document.getElementById('wiz-country').value;
+          document.getElementById('wiz-review').textContent = summary;
+        }
+        showStep(currentStep);
+      } else {
+        showToast('Wizard submitted successfully!', 'success');
+      }
+    });
+
+    document.getElementById('wiz-prev-btn').addEventListener('click', () => {
+      if (currentStep > 1) {
+        currentStep -= 1;
+        showStep(currentStep);
+      }
+    });
+
+    // initialize
+    showStep(currentStep);
+
+    // ==== Toast Notifications ====
+    function showToast(message, type) {
+      const toast = document.getElementById('toast');
+      const text = document.getElementById('toast-text');
+      text.textContent = message;
+      toast.style.background = type === 'error' ? '#b91c1c'
+                            : type === 'success' ? '#15803d'
+                            : '#333';
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 3000);
+    }
+
+    // Example dynamic error scenario: random checkout failure
+    // (call this from any button if you want another practice flow)
+    function simulateCheckout() {
+      showToast('Processing checkout...', 'info');
+      setTimeout(() => {
+        const ok = Math.random() > 0.5;
+        if (ok) {
+          showToast('Checkout completed successfully.', 'success');
+        } else {
+          showToast('Checkout failed (502). Please retry.', 'error');
+        }
+      }, 2000);
+    }
+
+  </script>
+</body>
+</html>
