@@ -3,18 +3,18 @@ import test, { expect } from "@playwright/test";
 
 
 test.beforeAll('---Test Start---',()=>{
-    console.log('---Test Start---')
+    //console.log('---Test Start---')
 })
 
 test('navigate',async ({page}) => {
-    await page.goto('/res/testsite.html');
+    await page.goto('https://grachtbijams.github.io/playwrightJS/res/testsite.html');
 
     await expect(page).toHaveTitle('Test Automation Practice Site')    
 })
 
 
 test('Invalid Login',async ({page}) => {
-    await page.goto('/res/testsite.html');
+    await page.goto('https://grachtbijams.github.io/playwrightJS/res/testsite.html');
 
     await expect(page.getByRole("checkbox",{name: 'Remember me'})).toBeChecked({checked:false});
     await page.getByRole('checkbox', { name: 'Remember me' }).check();
@@ -26,5 +26,5 @@ test('Invalid Login',async ({page}) => {
 })
 
 test.afterAll('---Test End---',()=>{
-    console.log('---Test End---')
+    //console.log('---Test End---')
 })
