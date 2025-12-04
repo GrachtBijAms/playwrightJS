@@ -12,11 +12,11 @@ This project is created for self-learning and practice with [Playwright](https:/
 - Integrate test reporting and debugging techniques
 
 ## Project Structure
-/tests         - Contains Playwright test scripts 
-/pages         - Page Object Model representations (if used) 
-/utils         - Helper utilities and reusable functions 
-/playwright.config.ts - Playwright configuration file 
-/package.json  - Project dependencies and scripts 
+/tests         - Contains Playwright test scripts
+/pages         - Page Object Model representations (if used)
+/utils         - Helper utilities and reusable functions
+/playwright.config.ts - Playwright configuration file
+/package.json  - Project dependencies and scripts
 /README.md     - This file
 
 
@@ -35,8 +35,9 @@ This project is created for self-learning and practice with [Playwright](https:/
 
 ### Running Tests
 1. Use the Playwright test runner to execute tests: npx playwright test
-2. To run tests in headed mode (visible browser): npx playwright test –headed
-3. To run tests on a specific browser: npx playwright test –project=firefox
+2. To run tests in headed mode (visible browser): npx playwright test --headed
+3. To run tests on a specific browser: npx playwright test --project=firefox
+4. To run tests in UI mode: npx playwright test --ui
 
 
 ## Learning Resources
