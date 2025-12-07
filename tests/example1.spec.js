@@ -26,6 +26,22 @@ test('Invalid Login',async ({page}) => {
     await expect(error).toHaveText('Invalid credentials.')
 })
 
+test('Forgot password',async ({page}) => {
+    await page.goto(web_url);
+    await expect(page.getByRole('link', { name: 'Forgot password?' })).toBeVisible();
+
+    page.on('dialog',async (dialog) => {
+        expect(dialog.type()).toBe('alert');
+        expect(dialog.message()).toContain('Password reset link sent!');
+        await dialog.accept();
+    })
+
+    await page.getByRole('link',{name: 'Forgot password?'}).click();
+   // await page.locator('a:has-text("Forgot password?")').click();
+
+
+})
+
 test.afterAll('---Test End---',()=>{
     //console.log('---Test End---')
 })
