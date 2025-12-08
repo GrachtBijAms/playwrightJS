@@ -176,6 +176,40 @@ Tests are implemented in `tests/seed.spec.ts` using Playwright TypeScript framew
 - **Expected Result**: Slider value display updates correctly as the slider is moved to different positions.
 - **Selectors Used**: `#volume-slider`, `#volume-value`
 
+## Test Suite: Drag & Drop Kanban
+
+#### Test 14: Drag Card from To-Do to In-Progress Column
+- **Objective**: Verify that dragging a card from the to-do column to the in-progress column works correctly.
+- **Steps**:
+  1. Navigate to the login page.
+  2. Verify the "Write tests" card is visible in the to-do column.
+  3. Drag the "Write tests" card to the in-progress column.
+  4. Verify the card appears in the in-progress column.
+- **Expected Result**: Card successfully moves from to-do to in-progress column.
+- **Selectors Used**: `#todo-column`, `#progress-column`, `.kanban-card[data-id="t1"]`
+
+#### Test 15: Drag Multiple Cards Between Kanban Columns
+- **Objective**: Verify that multiple drag and drop operations work correctly across different columns.
+- **Steps**:
+  1. Navigate to the login page.
+  2. Drag the "Fix bugs" card from to-do column to in-progress column.
+  3. Verify the card is in the in-progress column.
+  4. Drag the "Fix bugs" card from in-progress to done column.
+  5. Verify the card is now in the done column.
+- **Expected Result**: Card successfully moves through multiple columns (to-do → in-progress → done).
+- **Selectors Used**: `#todo-column`, `#progress-column`, `#done-column`, `.kanban-card[data-id="t2"]`
+
+#### Test 16: Drag Card Back to Original Column
+- **Objective**: Verify that cards can be moved back to their original column.
+- **Steps**:
+  1. Navigate to the login page.
+  2. Drag the "Write tests" card from to-do column to in-progress column.
+  3. Verify the card is in the in-progress column.
+  4. Drag the card back to the to-do column.
+  5. Verify the card is back in the to-do column.
+- **Expected Result**: Card can be moved between columns and back to the original location.
+- **Selectors Used**: `#todo-column`, `#progress-column`, `.kanban-card[data-id="t1"]`
+
 ### Implementation
 Tests are implemented in `tests/seed.spec.ts` using Playwright TypeScript framework.
 

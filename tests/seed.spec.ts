@@ -259,3 +259,67 @@ test.describe('Slider', () => {
     await expect(volumeValue).toHaveText('100');
   });
 });
+
+test.describe('Drag & Drop Kanban', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto(LOGIN_PAGE);
+    await expect(page.locator('text=Drag & Drop Kanban')).toBeVisible();
+  });
+
+  test('drag card from to-do to in-progress column', async ({ page }) => {
+    const todoColumn = page.locator('#todo-column');
+    const progressColumn = page.locator('#progress-column');
+    const writeTestsCard = page.locator('.kanban-card[data-id="t1"]');
+    
+    // Verify card is initially in todo column
+    await expect(writeTestsCard).toBeVisible();
+    
+    // Drag card to progress column
+    await writeTestsCard.dragTo(progressColumn);
+    
+    // Verify card is now in progress column
+    const cardInProgress = progressColumn.locator('.kanban-card[data-id="t1"]');
+    await expect(cardInProgress).toBeVisible();
+  });
+
+  test('drag multiple cards between kanban columns', async ({ page }) => {
+    const todoColumn = page.locator('#todo-column');
+    const progressColumn = page.locator('#progress-column');
+    const doneColumn = page.locator('#done-column');
+    const fixBugsCard = page.locator('.kanban-card[data-id="t2"]');
+    
+    // Drag fix bugs card from todo to progress
+    await fixBugsCard.dragTo(progressColumn);
+    
+    // Verify card is in progress column
+    let cardInProgress = progressColumn.locator('.kanban-card[data-id="t2"]');
+    await expect(cardInProgress).toBeVisible();
+    
+    // Drag card from progress to done
+    await cardInProgress.dragTo(doneColumn);
+    
+    // Verify card is in done column
+    const cardInDone = doneColumn.locator('.kanban-card[data-id="t2"]');
+    await expect(cardInDone).toBeVisible();
+  });
+
+  test('drag card back to original column', async ({ page }) => {
+    const todoColumn = page.locator('#todo-column');
+    const progressColumn = page.locator('#progress-column');
+    const writeTestsCard = page.locator('.kanban-card[data-id="t1"]');
+    
+    // Drag card to progress column
+    await writeTestsCard.dragTo(progressColumn);
+    
+    // Verify card is in progress
+    let cardInProgress = progressColumn.locator('.kanban-card[data-id="t1"]');
+    await expect(cardInProgress).toBeVisible();
+    
+    // Drag card back to todo column
+    await cardInProgress.dragTo(todoColumn);
+    
+    // Verify card is back in todo column
+    const cardBackInTodo = todoColumn.locator('.kanban-card[data-id="t1"]');
+    await expect(cardBackInTodo).toBeVisible();
+  });
+});
