@@ -70,7 +70,7 @@ test.describe('Search Products', () => {
 test.describe('Preferences', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(LOGIN_PAGE);
-    await expect(page.locator('text=Preferences')).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Preferences' })).toBeVisible();
   });
 
   test('save preferences with tool selection shows confirmation', async ({ page }) => {
