@@ -210,6 +210,21 @@ Tests are implemented in `tests/seed.spec.ts` using Playwright TypeScript framew
 - **Expected Result**: Card can be moved between columns and back to the original location.
 - **Selectors Used**: `#todo-column`, `#progress-column`, `.kanban-card[data-id="t1"]`
 
+## Test Suite: New Window
+
+#### Test 17: Open New Window Button Opens New Window and Shows Success Message
+- **Objective**: Verify that clicking the "Open New Window" button opens a new window/tab and displays a success message.
+- **Steps**:
+  1. Navigate to the login page.
+  2. Click the "Open New Window" button.
+  3. Wait for a new window/tab to open.
+  4. Verify the new window navigates to Google (https://www.google.com).
+  5. Verify the success message appears: "New window opened successfully!"
+  6. Verify the message is displayed in green color.
+  7. Close the new window.
+- **Expected Result**: New window opens successfully, navigates to Google, and success message appears in green.
+- **Selectors Used**: `#open-new-window-btn`, `#window-message`
+
 ### Implementation
 Tests are implemented in `tests/seed.spec.ts` using Playwright TypeScript framework.
 

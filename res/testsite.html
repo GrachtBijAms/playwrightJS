@@ -284,6 +284,14 @@
     <span id="toast-text"></span>
   </div>
 
+  <!-- New Window Section -->
+  <div class="section" id="new-window-section">
+    <h2>New Window Example</h2>
+    <p>Click the button below to open a new window/tab.</p>
+    <button id="open-new-window-btn" class="btn">Open New Window</button>
+    <p id="window-message"></p>
+  </div>
+
 
   <script>
     // ==== Login + validation ====
@@ -634,6 +642,18 @@
         }
       }, 2000);
     }
+
+    // ==== New Window ====
+    document.getElementById('open-new-window-btn').addEventListener('click', () => {
+      const newWindow = window.open('https://www.google.com', '_blank', 'width=800,height=600');
+      if (newWindow) {
+        document.getElementById('window-message').textContent = 'New window opened successfully!';
+        document.getElementById('window-message').style.color = 'green';
+      } else {
+        document.getElementById('window-message').textContent = 'Failed to open new window. Please check popup blocker.';
+        document.getElementById('window-message').style.color = 'red';
+      }
+    });
 
   </script>
 </body>

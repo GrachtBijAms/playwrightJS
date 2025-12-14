@@ -323,3 +323,32 @@ test.describe('Drag & Drop Kanban', () => {
     await expect(cardBackInTodo).toBeVisible();
   });
 });
+
+test.describe('New Window', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto(LOGIN_PAGE);
+    await expect(page.locator('text=New Window Example')).toBeVisible();
+  });
+
+  test('open new window button opens new window and shows success message', async ({ page, context }) => {
+    // Listen for new page event
+    const newPagePromise = context.waitForEvent('page');
+    
+    // Click the open new window button
+    await page.click('#open-new-window-btn');
+    
+    // Wait for new page to open
+    const newPage = await newPagePromise;
+    
+    // Verify new page opened and navigated to Google
+    await expect(newPage).toHaveURL(/google\.com/);
+    
+    // Verify success message on original page
+    const windowMessage = page.locator('#window-message');
+    await expect(windowMessage).toHaveText('New window opened successfully!');
+    await expect(windowMessage).toHaveCSS('color', 'rgb(0, 128, 0)'); // green color
+    
+    // Close the new window
+    await newPage.close();
+  });
+});
