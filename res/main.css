@@ -1,0 +1,16 @@
+#frame{
+    background-color: lightskyblue;
+    width: 300px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 2px 2px 12px grey;
+    margin: auto;
+    padding: 20px;  
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 20px;
+    background-color: #f4f4f4;
+}

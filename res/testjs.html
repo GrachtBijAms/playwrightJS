@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Converter</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='script.js'></script>
+</head>
+<body>
+    <div id="frame">
+        <form>
+        <label for="name">Currency Amount:</label>
+        <input type="text" id="frmamt" name="name">        
+        <div class="select-container">
+            <p>From:</p>
+        <img src="https://flagsapi.com/US/flat/64.png">
+        <select id="fromcurr" name="name">
+            <option value="USD">USD</option>    
+            <option value="INR">INR</option>
+            <option value="EUR">EUR</option>
+            <option value="JPY">JPY</option>
+        </select>
+        </div>
+        <img src="https://www.flaticon.com/free-icon/exchange_6329544?term=exchange&related_id=6329544">
+        <div class="select-container">
+            <p>To:</p>
+        <img src="https://flagsapi.com/US/flat/64.png">
+        <select id="tocurr" name="name">
+            <option value="USD">USD</option>    
+            <option value="INR">INR</option>
+            <option value="EUR">EUR</option>
+            <option value="JPY">JPY</option>
+        </select>
+        </div>
+        <input type="text" id="tocurr" name="name"><br><br>
+        <input type="submit" value="Submit">
+        <div id="result"></div>
+    </form>
+    </div>  
+</body>
+</html>
