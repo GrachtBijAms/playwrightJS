@@ -355,3 +355,40 @@
             expect(uploadedFileName).toBe('sampleFile.txt');
         });
     });
+
+    test.describe('JAvaScript Alerts Test',()=>{
+        test.beforeEach(async ({page}) => {
+            await page.goto('https://the-internet.herokuapp.com/javascript_alerts');         
+        });
+
+        test('JavaScript Alerts Handling Test', async ({page}) => {
+            // JS Alert
+            page.once('dialog', async dialog => {
+                console.log(`Alert message: ${dialog.message()}`);
+                expect(dialog.message()).toBe('I am a JS Alert');
+                await dialog.accept();
+            });
+            await page.getByRole('button', {name: 'Click for JS Alert'}).click();
+            const result = page.locator('#result');
+            await expect(result).toHaveText('You successfully clicked an alert');
+
+            // JS Confirm
+            page.once('dialog', async dialog => {
+                console.log(`Confirm message: ${dialog.message()}`);
+                expect(dialog.message()).toBe('I am a JS Confirm');
+                await dialog.dismiss();
+            });
+            await page.getByRole('button', {name: 'Click for JS Confirm'}).click();
+            await expect(result).toHaveText('You clicked: Cancel');
+
+            // JS Prompt
+            const promptInput = 'Playwright';
+            page.once('dialog', async dialog => {
+                console.log(`Prompt message: ${dialog.message()}`);
+                expect(dialog.message()).toBe('I am a JS prompt');
+                await dialog.accept(promptInput);
+            });
+            await page.getByRole('button', {name: 'Click for JS Prompt'}).click();
+            await expect(result).toHaveText(`You entered: ${promptInput}`);
+        });
+    });
