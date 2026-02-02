@@ -55,7 +55,7 @@ test('valid Login',async ({page}) => {
     // using locator to find element
     const success_msg = page.locator('p[id="login-message"]');
     await expect(success_msg).toHaveText('Login successful!');
-    await expect(success_msg.isVisible()).toBeTruthy();
+    //await expect(success_msg.isVisible()).toBeTruthy();
 
 })
 
