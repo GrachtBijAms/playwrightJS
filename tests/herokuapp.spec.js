@@ -310,3 +310,48 @@
         });
 
     });
+
+    test.describe('Entry Ad Test',()=>{
+        test.beforeEach(async ({page}) => {
+            await page.goto('https://the-internet.herokuapp.com/entry_ad');         
+        });
+
+        test('Entry Ad Modal Test', async ({page}) => {
+            const modal = page.locator('.modal');
+            const modalTitle = modal.locator('.modal-title');
+            const modalBody = modal.locator('.modal-body p');
+            const closeButton = modal.locator('.modal-footer p');
+
+            await expect(modal).toBeVisible();
+            const titleText = await modalTitle.innerText();
+            const bodyText = await modalBody.innerText();
+            console.log(`Modal Title: ${titleText}`);
+            console.log(`Modal Body: ${bodyText}`);
+            expect(titleText).toBe('THIS IS A MODAL WINDOW');
+            expect(bodyText.length).toBeGreaterThan(0);
+
+            await closeButton.click();
+            await expect(modal).toBeHidden();
+        });
+    });
+
+    test.describe('File Upload Test',()=>{
+        test.beforeEach(async ({page}) => {
+            await page.goto('https://the-internet.herokuapp.com/upload');         
+        });
+
+        test('File Upload Functionality Test', async ({page}) => {
+            const filePath = 'tests/sampleFile.txt'; // Ensure this file exists in the specified path
+            const fileInput = page.locator('#file-upload');
+            const uploadButton = page.getByRole('button', {name: 'Upload'});
+
+            await fileInput.setInputFiles(filePath);
+            await uploadButton.click();
+
+            const uploadedFiles = page.locator('#uploaded-files');
+            await expect(uploadedFiles).toBeVisible();
+            const uploadedFileName = await uploadedFiles.innerText();
+            console.log(`Uploaded File Name: ${uploadedFileName}`);
+            expect(uploadedFileName).toBe('sampleFile.txt');
+        });
+    });
