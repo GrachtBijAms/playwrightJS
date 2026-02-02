@@ -392,3 +392,24 @@
             await expect(result).toHaveText(`You entered: ${promptInput}`);
         });
     });
+
+
+    test.describe('Multiple Windows Test',()=>{
+        test.beforeEach(async ({page}) => {
+            await page.goto('https://the-internet.herokuapp.com/windows');         
+        });
+
+        test('Handle Multiple Windows Test', async ({page}) => {
+            const newWindowLink = page.getByRole('link', {name: 'Click Here'});
+            const [newPage] = await Promise.all([
+                page.context().waitForEvent('page'),
+                newWindowLink.click(),
+            ]);
+
+            await newPage.waitForLoadState();
+            await expect(newPage).toHaveURL('https://the-internet.herokuapp.com/windows/new');
+            const heading = newPage.getByRole('heading', {name: 'New Window'});
+            await expect(heading).toBeVisible();
+            console.log(`New window URL: ${newPage.url()}`);
+        });
+    });
