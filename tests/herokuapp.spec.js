@@ -323,6 +323,8 @@
             const closeButton = modal.locator('.modal-footer p');
 
             await expect(modal).toBeVisible();
+            await expect(modalTitle).toBeVisible();
+            await expect(modalBody).toBeVisible();
             const titleText = await modalTitle.innerText();
             const bodyText = await modalBody.innerText();
             console.log(`Modal Title: ${titleText}`);
