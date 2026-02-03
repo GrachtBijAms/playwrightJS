@@ -312,7 +312,7 @@
     });
 
     test.describe('Entry Ad Test',()=>{
-        test.beforeEach(async ({page}) => {
+        test.beforeEach(async ({page,browserName}) => {
             test.skip(browserName === 'webkit', 'WebKit modal rendering issue');
             await page.goto('https://the-internet.herokuapp.com/entry_ad');         
         });
