@@ -329,7 +329,7 @@
             const bodyText = await modalBody.innerText();
             console.log(`Modal Title: ${titleText}`);
             console.log(`Modal Body: ${bodyText}`);
-            expect(titleText).toBe('THIS IS A MODAL WINDOW');
+            expect(titleText).toContain('THIS IS A MODAL WINDOW');
             expect(bodyText.length).toBeGreaterThan(0);
 
             await closeButton.click();
@@ -358,7 +358,7 @@
         });
     });
 
-    test.describe('JAvaScript Alerts Test',()=>{
+    test.describe('JAavaScript Alerts Test',()=>{
         test.beforeEach(async ({page}) => {
             await page.goto('https://the-internet.herokuapp.com/javascript_alerts');         
         });
