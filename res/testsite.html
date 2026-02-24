@@ -289,11 +289,17 @@
     <h2>New Window Example</h2>
     <p>Click the button below to open a new window/tab.</p>
     <button id="open-new-window-btn" class="btn">Open New Window</button>
+        <!-- Button: JS window.open (new window) -->
+    <button onclick="openNewWindow()">Open Selenium.dev Window</button>
     <p id="window-message"></p>
   </div>
 
 
   <script>
+
+      function openNewWindow() {
+            window.open('https://www.selenium.dev', '_blank', 'width=800,height=600');
+        }
     // ==== Login + validation ====
     document.getElementById('login-btn').addEventListener('click', () => {
       const user = document.getElementById('username').value;
