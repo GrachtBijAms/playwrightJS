@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Learn JS</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+
+</head>
+<body>
+    <h1>Learn JavaScript</h1>
+    <button id="my-btn">Click Me</button>
+    <input id="name-input" type="text" placeholder="Type your name..." />
+<p id="output">You are typing: </p>
+<ul id="tools-list"></ul>
+<script>
+    const name1 =  document.querySelector("h1");
+    const btn = document.querySelector("#my-btn");
+    btn.addEventListener("click", function() {
+        name1.textContent = "Button clicked!";
+    });
+
+        const inputEl  = document.querySelector("#name-input");
+    const outputEl = document.querySelector("#output");
+
+    // As user types — update the <p> in real time
+    inputEl.addEventListener("keyup", () => {
+        outputEl.textContent = "You are typing: " + inputEl.value;
+    });
+
+        const tools = ["Selenium", "Cypress", "Playwright", "Postman", "Robot Framework"];
+    const listEl = document.querySelector("#tools-list");
+
+    // Loop through tools array
+    // Create a <li> for each tool
+    // Append each <li> to the <ul>
+
+    tools.forEach(tool => {
+        const li = document.createElement("li");
+        li.textContent = tool;
+        listEl.appendChild(li);
+    });
+</script>
+</body>
+    
+</html>
