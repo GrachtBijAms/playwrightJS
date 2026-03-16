@@ -1,4 +1,4 @@
-import {test, expect} from '@playwright/test';
+const {test, expect}= require('@playwright/test');
 const { CommonPOJO } = require('../pages/commonpojo');
 
 const web_url = 'https://grachtbijams.github.io/playwrightJS/res/testsite.html';
