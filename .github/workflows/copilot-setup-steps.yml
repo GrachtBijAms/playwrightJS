@@ -32,3 +32,6 @@ jobs:
     # Customize this step as needed
     - name: Build application
       run: npx run build
+      env:
+        FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+        CI: true
