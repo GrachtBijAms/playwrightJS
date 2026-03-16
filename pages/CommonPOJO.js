@@ -1,5 +1,6 @@
 import { expect } from '@playwright/test';
 
+
 class CommonPOJO {
 
     constructor(page) {
