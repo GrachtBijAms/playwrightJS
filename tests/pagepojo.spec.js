@@ -53,7 +53,7 @@ test('Verify page structure using POJO', async ({}) => {
 test('test', async ({  }) => {
 
     // browser
-    const browser = await chromium.launch({headless:false,slowMo:1000});
+    const browser = await chromium.launch({headless:true,slowMo:1000});
     //setting the resolution
     const context = await browser.newContext({
         viewport:{width:1280,height:720},
