@@ -52,7 +52,7 @@ test('Verify page structure using POJO', async ({}) => {
 
 test('test', async ({  }) => {
 
-        // browser
+    // browser
     const browser = await chromium.launch({headless:false,slowMo:1000});
     //setting the resolution
     const context = await browser.newContext({
@@ -61,14 +61,14 @@ test('test', async ({  }) => {
     });
     const page = await context.newPage();
   
-  await page.goto('https://www.saucedemo.com/');
-  await page.locator('[data-test="username"]').click();
-  await page.locator('[data-test="username"]').fill('standard_user');
+    await page.goto('https://www.saucedemo.com/');
+    await page.locator('[data-test="username"]').click();
+    await page.locator('[data-test="username"]').fill('standard_user');
 
-  await page.locator('[data-test="password"]').fill('secret_sauce1');
-  await page.locator('[data-test="login-button"]').click();
-  await page.getByRole('button', { name: 'Open Menu' }).click();
-  await page.locator('[data-test="logout-sidebar-link"]').click();
+    await page.locator('[data-test="password"]').fill('secret_sauce');
+    await page.locator('[data-test="login-button"]').click();
+    await page.getByRole('button', { name: 'Open Menu' }).click();
+    await page.locator('[data-test="logout-sidebar-link"]').click();
     await context.close();
     await page.close();
 
