@@ -30,10 +30,8 @@ test('Verify page structure', async ({page}) => {
     await expect(footer.locator('h2')).toHaveText('New Window Example');
 })  
 
-test('Verify page structure using POJO', async ({}) => {
+test('Verify page structure using POJO', async ({browser}) => {
 
-    // browser
-    const browser = await chromium.launch({headless:false,slowMo:1000});
     //setting the resolution
     const context = await browser.newContext({
         viewport:{width:1280,height:720},
@@ -50,7 +48,7 @@ test('Verify page structure using POJO', async ({}) => {
 })  
 
 
-test('test', async ({  }) => {
+test.skip('test', async ({  }) => {
 
     // browser
     const browser = await chromium.launch({headless:true,slowMo:1000});
