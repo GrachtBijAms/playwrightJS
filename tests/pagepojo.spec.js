@@ -1,4 +1,4 @@
-import {test,expect} from '@playwright/test';
+import {test,expect, chromium} from '@playwright/test';
 import {CommonPOJO} from '../pages/commonpojo'
 
 const web_url = 'https://grachtbijams.github.io/playwrightJS/res/testsite.html';
@@ -30,9 +30,47 @@ test('Verify page structure', async ({page}) => {
     await expect(footer.locator('h2')).toHaveText('New Window Example');
 })  
 
-test('Verify page structure using POJO', async ({page}) => {
+test('Verify page structure using POJO', async ({}) => {
+
+    // browser
+    const browser = await chromium.launch({headless:false,slowMo:1000});
+    //setting the resolution
+    const context = await browser.newContext({
+        viewport:{width:1280,height:720},
+        recordVideo:{dir:'videos/'}
+    });
+    const page = await context.newPage();
 
     const pojo = new CommonPOJO(page);
     await pojo.goto();
     await pojo.verifyHeader();
+
+    await context.close();
+    await page.close();
 })  
+
+
+test('test', async ({  }) => {
+
+        // browser
+    const browser = await chromium.launch({headless:false,slowMo:1000});
+    //setting the resolution
+    const context = await browser.newContext({
+        viewport:{width:1280,height:720},
+        recordVideo:{dir:'videos/'}
+    });
+    const page = await context.newPage();
+  
+  await page.goto('https://www.saucedemo.com/');
+  await page.locator('[data-test="username"]').click();
+  await page.locator('[data-test="username"]').fill('standard_user');
+
+  await page.locator('[data-test="password"]').fill('secret_sauce1');
+  await page.locator('[data-test="login-button"]').click();
+  await page.getByRole('button', { name: 'Open Menu' }).click();
+  await page.locator('[data-test="logout-sidebar-link"]').click();
+    await context.close();
+    await page.close();
+
+
+});
