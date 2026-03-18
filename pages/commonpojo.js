@@ -1,9 +1,9 @@
 import { expect } from '@playwright/test';
 
 
-class CommonPOJO {
+export class CommonPOJO {
 
-    constructor(page) {
+    constructor(page) { 
         this.page = page;
         this.header = page.locator('h1');
         this.loginSection = page.locator('id=login-section');
@@ -19,5 +19,3 @@ class CommonPOJO {
         await this.page.goto('https://grachtbijams.github.io/playwrightJS/res/testsite.html');
     }
 }   
-
-module.exports = { CommonPOJO };

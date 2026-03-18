@@ -1,5 +1,5 @@
-const  {test, expect}= require('@playwright/test');
-const { CommonPOJO } = require('../pages/commonpojo');
+import {test,expect} from '@playwright/test';
+import {CommonPOJO} from '../pages/commonpojo'
 
 const web_url = 'https://grachtbijams.github.io/playwrightJS/res/testsite.html';
 
@@ -32,7 +32,7 @@ test('Verify page structure', async ({page}) => {
 
 test('Verify page structure using POJO', async ({page}) => {
 
-    const commonPOJO = new CommonPOJO(page);
-    await commonPOJO.goto();
-    await commonPOJO.verifyHeader();
+    const pojo = new CommonPOJO(page);
+    await pojo.goto();
+    await pojo.verifyHeader();
 })  
