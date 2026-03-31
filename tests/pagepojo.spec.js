@@ -42,6 +42,7 @@ test('Verify page structure using POJO', async ({browser}) => {
     const pojo = new CommonPOJO(page);
     await pojo.goto();
     await pojo.verifyHeader();
+    await pojo.newwindow();
 
     await context.close();
     await page.close();
@@ -71,4 +72,44 @@ test.skip('test', async ({  }) => {
     await page.close();
 
 
+});
+
+
+
+
+test('Multiple Windows11', async ({ browser }) => {
+  const context = await browser.newContext({ recordVideo: { dir: 'videos/' } });
+  let page;
+  try {
+    page = await context.newPage();
+    const pojo = new CommonPOJO(page);
+
+    await pojo.goto();
+    await pojo.verifyHeader();
+    await pojo.newwindow();
+
+    // Fixed: Await Promise.all with proper event & longer timeout
+    const [newpage] = await Promise.all([
+      context.waitForEvent('page'),
+      page.waitForTimeout(3000)  // Increase if slow
+    ]);
+
+    await newpage.waitForLoadState('networkidle');
+    // Your assertions here
+    await expect(newpage).toHaveTitle("Google");
+    await newpage.getByRole("button",{ name: 'Alles accepteren' }).click();
+    await expect(newpage.locator("//input[text()='Google Zoeken']")).toBeVisible();
+
+    await pojo.selwindow();
+    const [newpage1] = await Promise.all([
+      context.waitForEvent('page'),
+      page.waitForTimeout(3000)  // Increase if slow
+    ]);
+    await expect(newpage1).toHaveTitle("Selenium");
+
+  } finally {
+
+    if (page) await page.close();
+    await context.close();
+  }
 });
