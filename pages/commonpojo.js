@@ -27,7 +27,7 @@ export class CommonPOJO {
   
     }
     async selwindow(){
-        await expect(this.newwindowbtn).toHaveText("Open New Window");
+        await expect(this.selewindow).toHaveText("Open Selenium.dev Window");
         await this.selewindow.click();
     }
 }   

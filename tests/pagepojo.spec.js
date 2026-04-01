@@ -91,8 +91,7 @@ test('Multiple Windows11', async ({ browser }) => {
     // Fixed: Await Promise.all with proper event & longer timeout
     const [newpage] = await Promise.all([
       context.waitForEvent('page'),
-      pojo.newwindow(),
-      page.waitForTimeout(3000)  // Increase if slow
+      pojo.newwindow()
     ]);
     
     await newpage.waitForLoadState('networkidle');
@@ -110,7 +109,6 @@ test('Multiple Windows11', async ({ browser }) => {
     const [newpage1] = await Promise.all([
       context.waitForEvent('page'),
       pojo.selwindow(),
-      page.waitForTimeout(3000)  // Increase if slow
     ]);
     await expect(newpage1).toHaveTitle("Selenium");
 
