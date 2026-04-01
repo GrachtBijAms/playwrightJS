@@ -86,23 +86,30 @@ test('Multiple Windows11', async ({ browser }) => {
 
     await pojo.goto();
     await pojo.verifyHeader();
-    await pojo.newwindow();
+    //await pojo.newwindow();
 
     // Fixed: Await Promise.all with proper event & longer timeout
     const [newpage] = await Promise.all([
       context.waitForEvent('page'),
+      pojo.newwindow(),
       page.waitForTimeout(3000)  // Increase if slow
     ]);
-
+    
     await newpage.waitForLoadState('networkidle');
     // Your assertions here
     await expect(newpage).toHaveTitle("Google");
-    await newpage.getByRole("button",{ name: 'Alles accepteren' }).click();
-    await expect(newpage.locator("//input[text()='Google Zoeken']")).toBeVisible();
+    const cookieBanner = newpage.getByRole("button", { name: "Alles accepteren" });
+    if (await cookieBanner.isVisible()) {
+      await cookieBanner.click();
+    }
+    const searchBtn = newpage.getByRole("button", { name: "Google Zoeken" });
+    await expect(searchBtn).toBeVisible();
+    
+ 
 
-    await pojo.selwindow();
     const [newpage1] = await Promise.all([
       context.waitForEvent('page'),
+      pojo.selwindow(),
       page.waitForTimeout(3000)  // Increase if slow
     ]);
     await expect(newpage1).toHaveTitle("Selenium");
