@@ -97,11 +97,11 @@ test('Multiple Windows11', async ({ browser }) => {
     await newpage.waitForLoadState('networkidle');
     // Your assertions here
     await expect(newpage).toHaveTitle("Google");
-    const cookieBanner = newpage.getByRole("button", { name: "Alles accepteren" });
+    const cookieBanner = newpage.getByRole("button", { name: "Alles accepteren" }).or(newpage.getByRole("button", { name: "Accept all" }));
     if (await cookieBanner.isVisible()) {
       await cookieBanner.click();
     }
-    const searchBtn = newpage.getByRole("button", { name: "Google Zoeken" });
+    const searchBtn = newpage.getByRole("button", { name: "Google zoeken" }).or(newpage.getByRole("button", { name: "Google Search" }));
     await expect(searchBtn).toBeVisible();
     
  
