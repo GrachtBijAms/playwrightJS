@@ -1,7 +1,11 @@
-# Playwright Self-Learning Project
+# Playwright E2E Test Automation Framework
 
-## Overview
-This project is created for self-learning and practice with [Playwright](https://playwright.dev/), a modern end-to-end testing framework for web applications. The goal is to explore key Playwright features, experiment with browser automation, and build reliable and maintainable test scripts.
+![Playwright CI](https://github.com/GrachtBijAms/playwrightJS/actions/workflows/playwright.yml/badge.svg)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
+![Playwright](https://img.shields.io/badge/Playwright-2EAD33?style=flat&logo=playwright&logoColor=white)
+
+A professional end-to-end test automation framework built with Playwright and JavaScript, following the Page Object Model design pattern.
+
 
 ## Objectives
 - Learn Playwright installation and setup
@@ -11,34 +15,62 @@ This project is created for self-learning and practice with [Playwright](https:/
 - Explore cross-browser testing with Chromium, Firefox, and WebKit
 - Integrate test reporting and debugging techniques
 
-## Project Structure
-/tests         - Contains Playwright test scripts
-/pages         - Page Object Model representations (if used)
-/utils         - Helper utilities and reusable functions
-/playwright.config.ts - Playwright configuration file
-/package.json  - Project dependencies and scripts
-/README.md     - This file
+## Framework Structure
+```
+├── .github/workflows/    # CI/CD pipeline (GitHub Actions)
+├── pages/                # Page Object Model classes
+├── specs/                # Test specifications
+├── tests/                # Playwright test files
+├── res/                  # Test site and resources
+├── playwright.config.js  # Playwright configuration
+└── package.json          # Dependencies and scripts
+```
 
+## Tech Stack
+
+- **Playwright** — cross-browser end-to-end testing
+- **JavaScript** — test scripting language
+- **Page Object Model** — maintainable, scalable test design
+- **GitHub Actions** — CI/CD pipeline on every push
 
 ## Getting Started
 
 ### Prerequisites
-- Node.js (>= 14.x) installed on your machine
-- Basic familiarity with JavaScript or TypeScript
+
+- Node.js >= 18
+- npm
 
 ### Installation
-1. Clone the repository:
-2. git clone https://github.com/yourusername/playwright-self-learning.git
-3. cd playwright-self-learning
-4. Install dependencies: npm install
-5. Install Playwright browsers: npx playwright install
+
+```bash
+git clone https://github.com/GrachtBijAms/playwrightJS.git
+cd playwrightJS
+npm install
+npx playwright install
+```
 
 ### Running Tests
-1. Use the Playwright test runner to execute tests: npx playwright test
-2. To run tests in headed mode (visible browser): npx playwright test --headed
-3. To run tests on a specific browser: npx playwright test --project=firefox
-4. To run tests in UI mode: npx playwright test --ui
 
+```bash
+# Run all tests
+npx playwright test
+
+# Run in headed mode
+npx playwright test --headed
+
+# Run specific browser
+npx playwright test --project=firefox
+
+# Run with UI mode
+npx playwright test --ui
+
+# View test report
+npx playwright show-report
+```
+
+## CI/CD
+
+Tests run automatically on every push and pull request to `main` via GitHub Actions across Chromium, Firefox, and WebKit.
 
 ## Learning Resources
 - [Playwright Official Documentation](https://playwright.dev/docs/intro)
